@@ -22,7 +22,7 @@ void Player::do_something()
 
 //Move player. Return new location to render
 sf::Vector2f Player::move(int dir, sf::Vector2f windowSize) {
-    int distance = 3;
+    int distance = 5;
 
     //Going right
     if (dir == 1 && posx + distance <= windowSize.x - width) {

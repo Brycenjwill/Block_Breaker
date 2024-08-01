@@ -25,7 +25,7 @@ namespace B {
 
 	public : 
 		Ball(sf::Vector2f startingPos, sf::RectangleShape object, int ballSize);
-		sf::Vector2f move(sf::Vector2f windowSize, sf::Vector2f playerPosition, sf::Vector2f playerSize);
-		void bounce();
+		sf::Vector2f move(sf::Vector2f windowSize, sf::Vector2f playerPosition, sf::Vector2f playerSize, sf::RectangleShape (&bricks)[60]);
+
 	};
 }

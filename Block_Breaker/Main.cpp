@@ -82,11 +82,11 @@ int main()
             }
             if (event.type == sf::Event::KeyReleased) {
                 if (event.key.scancode == sf::Keyboard::Scan::Right && direction == 1) {
-                    moving == false;
+                    moving = false;
                     direction = 0;
                 }
                 if (event.key.scancode == sf::Keyboard::Scan::Left) {
-                    moving == false;
+                    moving = false;
                     direction = 0;
                 }
             }
@@ -101,7 +101,7 @@ int main()
         }
 
         //Move ball
-        ballRect.setPosition(b.move(windowSize, playerRect.getPosition(), playerRect.getSize()));
+        ballRect.setPosition(b.move(windowSize, playerRect.getPosition(), playerRect.getSize(),  bricks));
         
         
         
@@ -111,11 +111,12 @@ int main()
         window.clear();
 
         //Draw gameobjects onto screen
-        window.draw(ballRect);
-        window.draw(playerRect);
         for (int i = 0; i < (sizeof(bricks) / sizeof(bricks[0])); i++) {
             window.draw(bricks[i]);
         }
+        window.draw(ballRect);
+        window.draw(playerRect);
+
         window.display();
     }
 
