@@ -31,6 +31,32 @@ int main()
     ballRect.setPosition(startingBallPos);
     Ball b(startingBallPos, ballRect, ballSize);
 
+
+    //Generate and store bricks
+    int brickWidth = 40;
+    int brickHeight = 20;
+    sf::Color colors[6] = { sf::Color::Red, sf::Color::Blue, sf::Color::Green, sf::Color::Yellow, sf::Color::Red, sf::Color::Blue };
+
+    //Store the "bricks" by their location.
+    sf::RectangleShape bricks[60];
+    int j = 0;
+    int sub = 0;
+    int layer = 0;
+    for (int i = 0; i < 60; i++) {
+        if (j >= 10){
+            sub += windowSize.x;
+            j = 0;
+            layer += 1;
+        }
+        sf::RectangleShape brick(sf::Vector2f(brickWidth, brickHeight));
+        brick.setFillColor(colors[layer]);
+        brick.setPosition(sf::Vector2f(0 + i * 40 - sub, layer * brickHeight));
+        brick.setOutlineColor(sf::Color::Black);
+        brick.setOutlineThickness(3);
+        bricks[i] = brick;
+        j += 1;
+    }
+
     //Event handling
     bool moving = false; //Check if player should be moving
     int direction = 0; //Set direction player is moving. 
@@ -87,6 +113,9 @@ int main()
         //Draw gameobjects onto screen
         window.draw(ballRect);
         window.draw(playerRect);
+        for (int i = 0; i < (sizeof(bricks) / sizeof(bricks[0])); i++) {
+            window.draw(bricks[i]);
+        }
         window.display();
     }
 
