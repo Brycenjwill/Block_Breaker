@@ -9,6 +9,9 @@ using namespace B;
 
 int main()
 {
+    //Keep track of bricks broken
+
+    int completed = 0;
     sf::Vector2f windowSize = sf::Vector2f(400, 600);
 
     sf::RenderWindow window(sf::VideoMode(400, 600), "Block Breaker");
@@ -111,13 +114,27 @@ int main()
         window.clear();
 
         //Draw gameobjects onto screen
+        
         for (int i = 0; i < (sizeof(bricks) / sizeof(bricks[0])); i++) {
+            if (bricks[i].getFillColor() == sf::Color::Black) {
+                completed += 1;
+            }
             window.draw(bricks[i]);
         }
+        if (completed == 60) {
+            cout << "YOU WIN!!!";
+            window.close();
+        }
+        completed = 0;
         window.draw(ballRect);
         window.draw(playerRect);
 
         window.display();
+
+        if (b.getPositiony() >= windowSize.y) {
+            cout << "Game over.";
+            window.close();
+        }
     }
 
     return 0;

@@ -54,16 +54,37 @@ sf::Vector2f Ball::move(sf::Vector2f windowSize, sf::Vector2f playerPosition, sf
 			//Make sure block is not hit / hidden
 			if (brick.getFillColor() != sf::Color::Black) {
 
-				//When hitting from side
-				if (posx > brick.getPosition().x && posx<= brick.getPosition().x + 40) {
+				//When hitting from side, make sure that were outside first
+				// || posx > brick.getPosition().x + 40
+				// // || posx <= dirx * speed + brick.getPosition().x + 40
+				//Currently outside of brick x width
+				if (posx < brick.getPosition().x) {
 
-					direction = sf::Vector2f(dirx *= -1, diry);
-					posx += direction.x * speed;
-					posy += direction.y * speed;
-					//Hide hit block
-					bricks[currentRow * 10 + i].setFillColor(sf::Color::Black);
-					cout << currentColumn;
+					if (posx + dirx * speed > brick.getPosition().x) {
+
+						direction = sf::Vector2f(dirx *= -1, diry);
+						posx += direction.x * speed;
+						posy += direction.y * speed;
+						//Hide hit block
+						bricks[currentRow * 10 + i].setFillColor(sf::Color::Black);
+						cout << currentRow;
+					}
 				}
+				else {
+					if (posx > brick.getPosition().x) {
+
+						if (posx + dirx * speed < brick.getPosition().x) {
+
+							direction = sf::Vector2f(dirx *= -1, diry);
+							posx += direction.x * speed;
+							posy += direction.y * speed;
+							//Hide hit block
+							bricks[currentRow * 10 + i].setFillColor(sf::Color::Black);
+							cout << currentRow;
+						}
+					}
+				}
+
 			}
 		}
 	}
@@ -155,9 +176,13 @@ sf::Vector2f Ball::move(sf::Vector2f windowSize, sf::Vector2f playerPosition, sf
 	else {
 		//Swap directions when hitting top of the screen
 		direction = sf::Vector2f(dirx, diry *= -1);
+		posy += direction.y * speed;
 	}
 
 
 	return sf::Vector2f(posx, posy);
 }
 
+int Ball::getPositiony() {
+	return posy;
+}
