@@ -34,83 +34,17 @@ sf::Vector2f Ball::move(sf::Vector2f windowSize, sf::Vector2f playerPosition, sf
 
 
 
-	//Remove later, code for seeting if ball is touching player
-
-
-
-	//Check if ball is touching brick, only checking the current column the ball is in for efficiency.
-	int currentColumn = floor(posx / 40);
-	int currentRow = floor(posy / 20);
-	//Check each 
 	
+					
 
 
-	//Check current row for side hits
-	if (currentRow <= 5) {
-		for (int i = 0; i < 10; i++) {
-			//Get brick to check
-			sf::RectangleShape brick = bricks[(currentRow * 10) + i];
 
-			//Make sure block is not hit / hidden
-			if (brick.getFillColor() != sf::Color::Black) {
+				
+				
+	
+			
+		
 
-				//When hitting from side, make sure that were outside first
-				// || posx > brick.getPosition().x + 40
-				// // || posx <= dirx * speed + brick.getPosition().x + 40
-				//Currently outside of brick x width
-				if (posx < brick.getPosition().x) {
-
-					if (posx + dirx * speed > brick.getPosition().x) {
-
-						direction = sf::Vector2f(dirx *= -1, diry);
-						posx += direction.x * speed;
-						posy += direction.y * speed;
-						//Hide hit block
-						bricks[currentRow * 10 + i].setFillColor(sf::Color::Black);
-						cout << currentRow;
-					}
-				}
-				else {
-					if (posx > brick.getPosition().x) {
-
-						if (posx + dirx * speed < brick.getPosition().x) {
-
-							direction = sf::Vector2f(dirx *= -1, diry);
-							posx += direction.x * speed;
-							posy += direction.y * speed;
-							//Hide hit block
-							bricks[currentRow * 10 + i].setFillColor(sf::Color::Black);
-							cout << currentRow;
-						}
-					}
-				}
-
-			}
-		}
-	}
-	else {
-
-		for (int i = 0; i < 6; i++) {
-			//Get brick to check
-			sf::RectangleShape brick = bricks[currentColumn + (10 * i)];
-
-			//Make sure block is not hit / hidden
-			if (brick.getFillColor() != sf::Color::Black) {
-
-				//When hitting from bottom / top
-				if (posy + (diry * speed) > brick.getPosition().y && posy + (diry * speed) <= brick.getPosition().y + 20) {
-					direction = sf::Vector2f(dirx, diry *= -1);
-					posx += direction.x * speed;
-					posy += direction.y * speed;
-
-					//Hide hit block
-					bricks[currentColumn + (10 * i)].setFillColor(sf::Color::Black);
-					cout << currentRow;
-				}
-			}
-		}
-
-	}
 
 
 

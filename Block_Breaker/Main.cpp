@@ -40,6 +40,8 @@ int main()
     int brickHeight = 20;
     sf::Color colors[6] = { sf::Color::Red, sf::Color::Blue, sf::Color::Green, sf::Color::Yellow, sf::Color::Red, sf::Color::Blue };
 
+
+    sf::Color outline(88, 57, 39);
     //Store the "bricks" by their location.
     sf::RectangleShape bricks[60];
     int j = 0;
@@ -111,7 +113,7 @@ int main()
 
 
         //Clear previous window
-        window.clear();
+        window.clear(outline);
 
         //Draw gameobjects onto screen
         
